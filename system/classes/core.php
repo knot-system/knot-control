@@ -50,6 +50,10 @@ class Core {
 		$this->log = new Log();
 
 
+		session_start();
+		$this->user = new User();
+		
+
 		$this->theme = new Theme();
 
 		$this->theme->add_metatag( 'charset', '<meta charset="utf-8">' );

@@ -62,3 +62,13 @@ function foot_html(){
 </html>
 <?php
 }
+
+
+function php_redirect( $path ) {
+	global $core;
+
+	$new_location = $core->baseurl.$path;
+
+	header( 'location:'.$new_location );
+	exit;
+}
