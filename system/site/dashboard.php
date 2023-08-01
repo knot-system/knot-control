@@ -11,7 +11,11 @@ snippet('header');
 
 	<h1>Dashboard</h1>
 
-	<pre>Me: <?= $core->user->get('me') ?></pre>
+<pre style="font-size: 0.8em;">
+Me: <?= $core->user->get('me') ?>
+
+Module: <?= var_dump($core->modules->get()) ?>
+</pre>
 
 
 </main>

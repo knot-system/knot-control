@@ -18,6 +18,8 @@ class Core {
 	public $user;
 
 	public $route;
+
+	public $modules;
 	
 	function __construct() {
 
@@ -63,6 +65,8 @@ class Core {
 		$this->theme->add_metatag( 'generator', '<meta tag="generator" content="Homestead Control v.'.$core->version().'">' );
 
 		$this->route = new Route();
+
+		$this->modules = new Modules();
 
 		$this->refresh_cache();
 	}
