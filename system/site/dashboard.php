@@ -19,7 +19,7 @@ $modules = $core->modules->get();
 		<ul>
 		<?php
 		foreach( $modules as $module ) {
-			echo '<li><strong>'.$module->get('name').'</strong> ('.$module->get('path').')</li>';
+			echo '<li><strong>'.$module->get('name').'</strong> v.'.$module->get('version').' ('.$module->get('path').')</li>';
 		}
 		?>
 		</ul>
