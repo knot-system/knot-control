@@ -1,5 +1,7 @@
 <?php
 
+// Version: 0.1.0
+
 if( ! $core ) exit;
 
 $modules = $core->modules->get();

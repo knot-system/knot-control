@@ -11,6 +11,8 @@ snippet('header');
 
 	<h1>Settings</h1>
 
+	<p>coming soon</p>
+
 </main>
 <?php
 
