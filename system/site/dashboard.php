@@ -6,16 +6,25 @@ head_html();
 
 snippet('header');
 
+$modules = $core->modules->get();
+
 ?>
 <main class="error-404">
 
 	<h1>Dashboard</h1>
 
-<pre style="font-size: 0.8em;">
-Me: <?= $core->user->get('me') ?>
-
-Module: <?= var_dump($core->modules->get()) ?>
-</pre>
+<ul>
+	<li>Login: <strong><?= $core->user->get('me') ?></strong></li>
+	<li>Module:
+		<ul>
+		<?php
+		foreach( $modules as $module ) {
+			echo '<li><strong>'.$module->get('name').'</strong> ('.$module->get('path').')</li>';
+		}
+		?>
+		</ul>
+	</li>
+</ul>
 
 
 </main>

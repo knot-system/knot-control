@@ -120,6 +120,19 @@ a {
 		transition: color 100ms ease-in-out;
 	}
 
+code.response {
+	border: 1px solid grey;
+	padding: 10px;
+	display: block;
+	pointer-events: none;
+	opacity: 0.5;
+}
+	code.response a {
+		text-decoration: none;
+		color: inherit;
+		pointer-events: none;
+	}
+
 form {
 
 }
@@ -282,10 +295,12 @@ header {
 }
 
 	header ul {
-		display: inline;
 		list-style: none;
 		padding: 0;
 		margin: 0 0 0 -10px;
+		display: flex;
+		align-items: center;
+		justify-content: flex-start;
 	}
 
 		header ul li {
@@ -299,6 +314,10 @@ header {
 
 		header ul li.active a {
 			color: inherit;
+		}
+
+		header ul li:last-child {
+			margin-left: auto;
 		}
 
 footer {

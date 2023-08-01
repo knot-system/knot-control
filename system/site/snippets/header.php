@@ -9,7 +9,10 @@ $menu = [
 	'action/logout' => 'Logout',
 ];
 
-$active_slug = un_trailing_slash_it(implode('/', $core->route->get('request')));
+$request = $core->route->get('request');
+
+$active_slug = false;
+if( ! empty($request[0]) ) $active_slug = $request[0];
 
 ?>
 <header>

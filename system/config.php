@@ -13,7 +13,7 @@ return [
 		'sekretaer' => '../sekretaer/',
 		'postamt' => '../postamt/',
 		'einwohnermeldeamt' => '../einwohnermeldeamt/',
-		'homestead-control' => './', // this should point to the current directory
+		'homestead-control' => '../homestead-control/', // this should point to the current directory
 	],
 	'cookie_lifetime' => 60*60*24*10, // 10 days, in seconds
 	'cache_lifetime' => 60*60*24*30, // 30 days, in seconds
