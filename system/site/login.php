@@ -43,19 +43,15 @@ if( isset($_GET['login_url']) ) {
 			<span class="spacer"></span> <button>Login</button> <span id="login-loader" class="loading hidden"></span>
 
 			<input type="hidden" name="path" value="<?= implode('/', $core->route->request) ?>">
-		
-			<br><span class="spacer"></span> <span class="alpha-warning">this is an early release. things may break.</span>
 
-		</form>
-		
+		</form>		
 
 	</section>
 
 </main>
 
-<footer>
-	<a href="https://github.com/maxhaesslein/homestead-control/" target="_blank" rel="noopener">Homstead Control</a> v.<?= $core->version() ?>
-</footer>
-
 <?php
+
+snippet('footer');
+
 foot_html();

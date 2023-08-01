@@ -4,6 +4,7 @@
 class Route {
 
 	public $route;
+	public $request;
 
 	function __construct() {
 
@@ -16,6 +17,8 @@ class Route {
 		$request = $request[0];
 
 		$request = explode( '/', $request );
+
+		$this->request = $request;
 
 
 		if( ! empty($request[0]) && $request[0] == 'action' ) {
@@ -83,6 +86,7 @@ class Route {
 
 				$this->route = array(
 					'template' => $template,
+					'request' => $request,
 				);
 
 			}

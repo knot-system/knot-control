@@ -9,9 +9,10 @@ snippet('header');
 ?>
 <main class="error-404">
 
-	<h1>404 not found</h1>
+	<h1>Dashboard</h1>
 
-	<p>This subpage does not exist.</p>
+	<pre>Me: <?= $core->user->get('me') ?></pre>
+
 
 </main>
 <?php

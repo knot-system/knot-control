@@ -15,7 +15,7 @@ class Core {
 	public $log;
 	public $theme;
 
-	public $session;
+	public $user;
 
 	public $route;
 	

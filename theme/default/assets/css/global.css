@@ -205,12 +205,6 @@ sub, sup {
 		bottom: -0.25em;
 	}
 
-main {
-	max-width: 800px;
-	margin: 0;
-	box-sizing: border-box;
-}
-
 hr {
 	margin: 1.5em 0;
 	width: 100%;
@@ -224,7 +218,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 	h1 {
-		font-size: 3em;
+		font-size: 2em;
 	}
 
 		h1 a {
@@ -233,7 +227,7 @@ h1, h2, h3, h4, h5, h6 {
 		}
 
 	h2 {
-		font-size: 2em;
+		font-size: 1.8em;
 	}
 
 	h3 {
@@ -251,11 +245,11 @@ h1, h2, h3, h4, h5, h6 {
 	@media( max-width: 640px ) {
 
 		h1 {
-			font-size: 2.7em;
+			font-size: 1.8em;
 		}
 
 		h2 {
-			font-size: 1.8em;
+			font-size: 1.6em;
 		}
 
 		h3 {
@@ -271,6 +265,48 @@ h1, h2, h3, h4, h5, h6 {
 		}
 
 	}
+
+main {
+	max-width: 800px;
+	min-height: calc(100vh - 40px - 4em);
+	margin: 0 auto;
+	box-sizing: border-box;
+	padding: 20px;
+}
+
+header {
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	box-sizing: border-box;
+}
+
+	header ul {
+		display: inline;
+		list-style: none;
+		padding: 0;
+		margin: 0 0 0 -10px;
+	}
+
+		header ul li {
+			display: inline;
+		}
+
+		header ul li a {
+			text-decoration: none;
+			padding: 10px;
+		}
+
+		header ul li.active a {
+			color: inherit;
+		}
+
+footer {
+	font-size: 0.8em;
+	padding: 10px;
+	opacity: 0.8;
+	text-align: right;
+}
 
 main.login {
 	min-height: 100vh;
