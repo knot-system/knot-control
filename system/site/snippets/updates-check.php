@@ -9,8 +9,8 @@ if( ! empty($_POST['modules']) ) $selected_modules = $_POST['modules'];
 
 if( ! count($selected_modules) ) {
 	?>
-	<p><strong>Fehler:</strong> kein Modul ausgewählt</p>
-	<p><a class="button" href="<?= url('updates') ?>">Module wählen</a>
+	<p><strong>Error:</strong> no module selected</p>
+	<p><a class="button" href="<?= url('updates') ?>">select module</a>
 	<?php
 } else {
 

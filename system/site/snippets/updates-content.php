@@ -14,7 +14,7 @@ if( empty($route[1]) ) {
 	snippet('updates-install');
 } else {
 	?>
-	<p><strong>Fehler:</strong> Seite nicht gefunden</p>
-	<p><a class="button" href="<?= url('updates') ?>">zu den Updates</a>
+	<p><strong>Error:</strong> page not found</p>
+	<p><a class="button" href="<?= url('updates') ?>">go to updates</a>
 	<?php
 }

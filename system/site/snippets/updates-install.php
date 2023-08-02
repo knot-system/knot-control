@@ -9,13 +9,13 @@ if( ! empty($_POST['modules']) ) $modules = $_POST['modules'];
 
 if( ! count($modules) ) {
 	?>
-	<p><strong>Fehler:</strong> kein Modul ausgewählt</p>
-	<p><a class="button" href="<?= url('updates') ?>">Module wählen</a>
+	<p><strong>Error:</strong> no module selected</p>
+	<p><a class="button" href="<?= url('updates') ?>">select module</a>
 	<?php
 } else {
 
 	?>
-	<p>Starting update …</p>
+	<p>starting update …</p>
 	<?php
 	foreach( $modules as $module_id ) {
 
@@ -38,7 +38,7 @@ if( ! count($modules) ) {
 		}
 	}
 	?>
-	<p>All done.</p>
+	<p>all done.</p>
 	<p><a class="button" href="<?= url('updates') ?>">refresh this page</a></p>
 	<?php
 

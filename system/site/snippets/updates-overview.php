@@ -12,7 +12,7 @@ $modules = $core->modules->get();
 	<?php
 	foreach( $modules as $module ) {
 		?>
-		<label><input type="checkbox" name="modules[]" value="<?= $module->get('id') ?>" checked> <strong><?= $module->get('name') ?></strong> (aktuell: v.<?= $module->get('version') ?>)</label>
+		<label><input type="checkbox" name="modules[]" value="<?= $module->get('id') ?>" checked> <strong><?= $module->get('name') ?></strong> (installed: v.<?= $module->get('version') ?>)</label>
 		<?php
 	}
 	?>
