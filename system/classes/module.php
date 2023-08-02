@@ -353,6 +353,8 @@ class Module {
 
 			$type = $this->get_config_type( $key );
 			if( $type == 'complex' ) {
+				if( ! $value ) return '';
+
 				$new_value = $value; // should already be a stringified array or similar, we want to save it 'as-is'
 			} else {
 				$new_value = "'".$value."'";
