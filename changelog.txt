@@ -1,3 +1,5 @@
 v.0.1.0
 
 - initial release
+- change settings for installed modules
+- update all installed modules
