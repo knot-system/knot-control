@@ -453,3 +453,13 @@ fieldset {
 	fieldset label {
 		margin: 1em 0;
 	}
+
+.success-message {
+	display: block;
+	padding: 10px;
+	border: 1px solid var(--color-box-border);
+	background: var(--color-box-background);
+	font-weight: var(--font-default-weight-medium);
+	box-shadow: 0 0 20px rgba(0,0,0,.1);
+	text-align: center;
+}

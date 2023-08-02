@@ -9,6 +9,8 @@ class Module {
 	private $baseurl;
 	private $urls;
 	private $version;
+	private $config = NULL;
+	private $themes = NULL;
 
 	function __construct( $id, $name, $abspath, $baseurl, $urls  ) {
 
@@ -108,32 +110,189 @@ class Module {
 
 		return true;
 	}
+
+	function load_config() {
+		if( $this->config !== NULL ) return $this->config;
+
+		$local_config_file = $this->abspath.'config.php';
+		$core_config_file = $this->abspath.'system/config.php';
+
+		$local_config = [];
+		if( file_exists($local_config_file) ) {
+			$local_config = include($local_config_file);
+		}
+
+		$core_config = [];
+		if( file_exists($core_config_file) ) {
+			$core_config = include($core_config_file);
+		}
+
+		$config = [
+			'local' => $local_config,
+			'core' => $core_config,
+		];
+
+		$this->config = $config;
+
+		return $config;
+	}
+
+	function get_config_definitions() {
+
+		// TODO: move into modules, something like 'system/config_options.php' ?
+
+		if( $this->id == 'eigenheim' ) {
+			return [
+				'site_title' => [
+					'type' => 'string',
+					'description' => '',
+				],
+				'theme' => [
+					'type' => 'theme',
+					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
+				],
+				'theme-color-scheme' => [
+					'type' => 'array',
+					'description' => 'not all themes support (all) color schemes',
+					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
+				],
+				'microsub' => [
+					'type' => 'url',
+					'description' => '',
+				],
+				'indieauth-metadata' => [
+					'type' => 'url',
+					'description' => '',
+				],
+				'posts_per_page' => [
+					'type' => 'int',
+					'description' => '',
+				],
+				'link_detection' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'link_preview' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+			];
+		} elseif( $this->id == 'sekretaer' ) {
+			return [
+				'theme' => [
+					'type' => 'theme',
+					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
+				],
+				'theme-color-scheme' => [
+					'type' => 'array',
+					'description' => 'not all themes support (all) color schemes',
+					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
+				],
+				'microsub' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'micropub' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'datetime_format' => [
+					'type' => 'string',
+					'description' => '',
+				],
+				'link_preview_nojs_refresh' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'link_preview_autorefresh' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'show_item_content' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+			];
+		} elseif( $this->id == 'postamt' ) {
+			return [
+				'force_refresh_posts' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+				'refresh_on_connect' => [
+					'type' => 'bool',
+					'description' => '',
+				],
+			];
+		} elseif( $this->id == 'einwohnermeldeamt' ) {
+			return [
+				'theme' => [
+					'type' => 'theme',
+					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
+				],
+				'theme-color-scheme' => [
+					'type' => 'array',
+					'description' => 'not all themes support (all) color schemes',
+					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
+				],
+			];
+		} else {
+			return [];
+		}
+
+	}
 	
+	function get_editable_config_options() {
+		
+		$config_definitions = $this->get_config_definitions();
+
+		if( empty($config_definitions) ) return [];
+
+		$config_options = [];
+		foreach( $config_definitions as $key => $config_definition ) {
+			if( empty($config_definition['type']) ) continue;
+			$config_options[$key] = $config_definition['type'];
+		}
+
+		return $config_options;
+	}
+
 	function get_config_current( $option ) {
-		// TODO
+
+		$config = $this->load_config();
+
+		if( array_key_exists($option, $config['local']) ) {
+			return $config['local'][$option];
+		}
+
 		return NULL;
 	}
 
 	function get_config_default( $option ) {
-		// TODO
-		return 'default-value';
+
+		$config = $this->load_config();
+
+		if( array_key_exists($option, $config['core']) ) {
+			return $config['core'][$option];
+		}
+
+		return NULL;
 	}
 
 	function get_config_description( $option ) {
-		$description = '';
+		
+		$config_definitions = $this->get_config_definitions();
 
-		if( $option == 'theme' ) {
-			$description = 'you can add more themes in the <code>theme/</code> subfolder';
-		} elseif( $option == 'theme-color-scheme' ) {
-			$description = 'not all themes support (all) color schemes';
-		}
+		if( empty($config_definitions) ) return '';
+		if( empty($config_definitions[$option]) ) return '';
+		if( empty($config_definitions[$option]['description'])) return '';
 
-		// TODO
-
-		return $description;
+		return $config_definitions[$option]['description'];
 	}
 
 	function get_themes() {
+
+		if( $this->themes !== NULL ) return $this->themes;
 
 		$theme_folder = new Folder( $this->abspath.'theme' );
 		$themes = $theme_folder->get_subfolders();
@@ -164,14 +323,120 @@ class Module {
 		// move default theme to first position:
 		$default = $theme_list['default'];
 		unset($theme_list['default']);
-		array_unshift( $theme_list, $default );
+		$theme_list = array_merge( ['default' => $default], $theme_list);
+
+		$this->themes = $theme_list;
 
 		return $theme_list;
 	}
 
-	function get_theme_colorschemes() {
-		// TODO: make them dynamic and let the theme.php configure the available color schemes
-		return [ 'default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac' ];
+	function get_array_options( $option ) {
+
+		$config_definitions = $this->get_config_definitions();
+
+		if( empty($config_definitions) ) return [];
+		if( empty($config_definitions[$option]) ) return [];
+		if( empty($config_definitions[$option]['description'])) return [];
+
+		return $config_definitions[$option]['options'];
+	}
+
+	function update_config( $new_config_options ) {
+
+		$config = $this->load_config();
+		$editable_config_options = $this->get_editable_config_options();
+
+		foreach( $new_config_options as $option => $new_value ) {
+
+			if( ! array_key_exists($option, $editable_config_options) ) {
+				// skip options that are not set as 'editable'
+				continue;
+			}
+
+			if( $new_value == 'default' ) {
+				// remove existing options, that are now set to 'default'
+				unset($config['local'][$option]);
+				continue;
+			}
+
+			// set new option value
+			$config['local'][$option] = $new_value;
+		}
+
+		$this->save_config_file( $config['local'] );
+	}
+
+	function save_config_file( $config ) {
+
+		$new_config_content = "<?php\r\n\r\nreturn [\r\n";
+		foreach( $config as $option => $value ) {
+			$new_config_content .= $this->stringify_config_option( $option, $value );
+		}
+		$new_config_content .= "];\r\n";
+		file_put_contents( $this->abspath.'config.php', $new_config_content );
+		
+	}
+
+	function stringify_config_option( $key, $value, $depth = 1 ) {
+
+		$string = '';
+
+		if( $key ) {
+			// associative array
+			$string .= str_repeat( '	', $depth );
+			$string .= "'".$key."' => ";
+		}
+
+		if( is_int($value) ) {
+
+			$new_value = $value;
+
+		} elseif( is_bool($value) ) {
+
+			if( $value ) {
+				$new_value = 'true';
+			} else {
+				$new_value = 'false';
+			}
+
+		} elseif( is_array($value) ) {
+
+			if( array_is_list($value) ) {
+				$new_value = '[';
+				// array is sequential
+				foreach( $value as $subvalue ) {
+					$new_value .= $this->stringify_config_option( false, $subvalue, $depth+1 );
+				}
+				$new_value = rtrim($new_value, ','); // remove last ',';
+				$new_value .= ']';
+			} else {
+				$new_value = "[\r\n";
+				// array is associative
+				foreach( $value as $subkey => $subvalue ) {
+					$new_value .= $this->stringify_config_option( $subkey, $subvalue, $depth+1 );
+				}
+				$new_value .= str_repeat( '	', $depth );
+				$new_value .= ']';
+			}
+
+		} else {
+			// is string, or unknown
+
+			$new_value = "'".$value."'";
+
+		}
+
+		$string .= $new_value;
+
+		if( $key ) {
+			// associative array
+			$string .= ",\r\n";
+		} else {
+			// sequential array
+			$string .= ', ';
+		}
+
+		return $string;
 	}
 
 }
