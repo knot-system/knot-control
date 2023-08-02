@@ -31,6 +31,10 @@ $groups = [
 		'force_refresh_posts' => 'bool',
 		'refresh_on_connect' => 'bool',
 	],
+	'einwohnermeldeamt' => [
+		'theme' => 'theme',
+		'theme-color-scheme' => 'theme-color-scheme',
+	]
 ];
 
 ?>
@@ -55,9 +59,9 @@ $groups = [
 				<?php
 				foreach( $settings as $option => $type ) {
 
-					$value = NULL; // TODO
-					$default = 'default-value'; // TODO
-					$description = 'this may be a short description text below the field'; // TODO
+					$value = $module->get_config_current( $option );
+					$default = $module->get_config_default( $option );
+					$description = $module->get_config_description( $option ) ;
 
 					?>
 					<label>
@@ -84,17 +88,31 @@ $groups = [
 							<input type="number" value="<?= $value ?>" placeholder="<?= $default ?>" step="1" min="0">
 							<?php
 						} elseif( $type == 'theme' ) {
+							$themes = $module->get_themes();
+							if( ! $value ) $value = $default;
 							?>
 							<select name="<?= $module_id ?>[<?= $option ?>]">
-								<?php // TODO ?>
-								<option value="default"<?php if( $value !== true && $value !== false ) echo ' selected'; ?>>Default (<?= $default ?>)</option>
+								<?php
+								foreach( $themes as $theme_id => $theme_name ) {
+									?>
+									<option value="<?= $theme_id ?>"<?php if( $value == $theme_id ) echo ' selected'; ?>><?= $theme_name ?></option>
+									<?php
+								}
+								?>
 							</select>
 							<?php
 						} elseif( $type == 'theme-color-scheme' ) {
+							$color_schemes = $module->get_theme_colorschemes();
+							if( ! $value ) $value = $default;
 							?>
 							<select name="<?= $module_id ?>[<?= $option ?>]">
-								<?php // TODO ?>
-								<option value="default"<?php if( $value !== true && $value !== false ) echo ' selected'; ?>>Default (<?= $default ?>)</option>
+								<?php
+								foreach( $color_schemes as $color_scheme_id => $color_scheme_name ) {
+									?>
+									<option value="<?= $color_scheme_id ?>"<?php if( $value == $color_scheme_id ) echo ' selected'; ?>><?= $color_scheme_name ?></option>
+									<?php
+								}
+								?>
 							</select>
 							<?php
 						}
@@ -110,7 +128,7 @@ $groups = [
 		}
 		?>
 
-		<div class="save-button-wrapper"><button disabled>save settings</button></div>
+		<div class="save-button-wrapper"><button disabled>update settings</button></div>
 
 	</form>
 

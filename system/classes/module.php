@@ -109,4 +109,69 @@ class Module {
 		return true;
 	}
 	
+	function get_config_current( $option ) {
+		// TODO
+		return NULL;
+	}
+
+	function get_config_default( $option ) {
+		// TODO
+		return 'default-value';
+	}
+
+	function get_config_description( $option ) {
+		$description = '';
+
+		if( $option == 'theme' ) {
+			$description = 'you can add more themes in the <code>theme/</code> subfolder';
+		} elseif( $option == 'theme-color-scheme' ) {
+			$description = 'not all themes support (all) color schemes';
+		}
+
+		// TODO
+
+		return $description;
+	}
+
+	function get_themes() {
+
+		$theme_folder = new Folder( $this->abspath.'theme' );
+		$themes = $theme_folder->get_subfolders();
+
+		$theme_list = [];
+
+		foreach( $themes as $theme_subfolder ) {
+			$folder_name = $theme_subfolder['name'];
+			$path = $theme_subfolder['path'];
+			$theme_file = $path.'theme.php';
+			if( ! file_exists($theme_file) ) continue;
+
+			$theme = include($theme_file);
+
+			$name = $folder_name;
+			if( ! empty($theme['name']) ) $name = $theme['name'];
+
+			$version = false;
+			if( ! empty($theme['version']) ) $version = $theme['version'];
+
+			if( $version ) $name .= ' (v.'.$version.')';
+
+			$theme_list[$folder_name] = $name;
+		}
+
+		asort($theme_list);
+
+		// move default theme to first position:
+		$default = $theme_list['default'];
+		unset($theme_list['default']);
+		array_unshift( $theme_list, $default );
+
+		return $theme_list;
+	}
+
+	function get_theme_colorschemes() {
+		// TODO: make them dynamic and let the theme.php configure the available color schemes
+		return [ 'default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac' ];
+	}
+
 }
