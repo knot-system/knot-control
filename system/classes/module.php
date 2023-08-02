@@ -11,6 +11,7 @@ class Module {
 	private $version;
 	private $config = NULL;
 	private $themes = NULL;
+	private $config_definitions = NULL;
 
 	function __construct( $id, $name, $abspath, $baseurl, $urls  ) {
 
@@ -35,6 +36,7 @@ class Module {
 	}
 
 	function get( $field ) {
+
 		if( $field == 'id' ) {
 			return $this->id;
 		} elseif( $field == 'name' ) {
@@ -46,9 +48,11 @@ class Module {
 		} elseif( $field == 'version' ) {
 			return $this->version;
 		}
+
 	}
 
 	function search_update() {
+
 		if( ! $this->urls || empty($this->urls['release_api']) ) return [];
 
 		$api_url = $this->urls['release_api'];
@@ -112,6 +116,7 @@ class Module {
 	}
 
 	function load_config() {
+
 		if( $this->config !== NULL ) return $this->config;
 
 		$local_config_file = $this->abspath.'config.php';
@@ -138,108 +143,19 @@ class Module {
 	}
 
 	function get_config_definitions() {
+		
+		if( $this->config_definitions !== NULL ) return $this->config_definitions;
 
-		// TODO: move into modules, something like 'system/config_options.php' ?
+		$config_definitions_file = $this->abspath.'system/config_definitions.php';
 
-		if( $this->id == 'eigenheim' ) {
-			return [
-				'site_title' => [
-					'type' => 'string',
-					'description' => '',
-				],
-				'theme' => [
-					'type' => 'theme',
-					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
-				],
-				'theme-color-scheme' => [
-					'type' => 'array',
-					'description' => 'not all themes support (all) color schemes',
-					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
-				],
-				'microsub' => [
-					'type' => 'url',
-					'description' => '',
-				],
-				'indieauth-metadata' => [
-					'type' => 'url',
-					'description' => '',
-				],
-				'posts_per_page' => [
-					'type' => 'int',
-					'description' => '',
-				],
-				'link_detection' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'link_preview' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-			];
-		} elseif( $this->id == 'sekretaer' ) {
-			return [
-				'theme' => [
-					'type' => 'theme',
-					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
-				],
-				'theme-color-scheme' => [
-					'type' => 'array',
-					'description' => 'not all themes support (all) color schemes',
-					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
-				],
-				'microsub' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'micropub' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'datetime_format' => [
-					'type' => 'string',
-					'description' => '',
-				],
-				'link_preview_nojs_refresh' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'link_preview_autorefresh' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'show_item_content' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-			];
-		} elseif( $this->id == 'postamt' ) {
-			return [
-				'force_refresh_posts' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-				'refresh_on_connect' => [
-					'type' => 'bool',
-					'description' => '',
-				],
-			];
-		} elseif( $this->id == 'einwohnermeldeamt' ) {
-			return [
-				'theme' => [
-					'type' => 'theme',
-					'description' => 'you can add more themes in the <code>theme/</code> subfolder',
-				],
-				'theme-color-scheme' => [
-					'type' => 'array',
-					'description' => 'not all themes support (all) color schemes',
-					'options' => ['default' => 'Default (blue)', 'green' => 'Green', 'red' => 'Red', 'lilac' => 'Lilac'],
-				],
-			];
-		} else {
-			return [];
+		$config_definitions = [];
+		if( file_exists($config_definitions_file) ) {
+			$config_definitions = include($config_definitions_file);
 		}
 
+		$this->config_definitions = $config_definitions;
+
+		return $config_definitions;
 	}
 	
 	function get_editable_config_options() {
