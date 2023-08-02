@@ -12,9 +12,13 @@ snippet('header');
 	<h1>Settings</h1>
 
 	<?php
-	if( isset($_GET['updated']) ) {
+	if( isset($_GET['success']) ) {
 		?>
-		<p class="success-message">all settings were updated</p>
+		<p class="success message">all settings were updated</p>
+		<?php
+	} elseif( isset($_GET['error']) ) {
+		?>
+		<p class="error message"><strong>Error:</strong> something went wrong while updating the settings. Please make sure, that all <code>config.php</code> files in the root directories of the modules are writeable!</p>
 		<?php
 	}
 	?>

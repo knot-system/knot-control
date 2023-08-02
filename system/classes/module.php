@@ -363,7 +363,7 @@ class Module {
 			$config['local'][$option] = $new_value;
 		}
 
-		$this->save_config_file( $config['local'] );
+		return $this->save_config_file( $config['local'] );
 	}
 
 	function save_config_file( $config ) {
@@ -373,8 +373,8 @@ class Module {
 			$new_config_content .= $this->stringify_config_option( $option, $value );
 		}
 		$new_config_content .= "];\r\n";
-		file_put_contents( $this->abspath.'config.php', $new_config_content );
 		
+		return file_put_contents( $this->abspath.'config.php', $new_config_content );
 	}
 
 	function stringify_config_option( $key, $value, $depth = 1 ) {
