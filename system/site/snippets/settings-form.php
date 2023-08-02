@@ -102,6 +102,16 @@ snippet('header');
 								?>
 							</select>
 							<?php
+						} elseif( $type == 'complex' ) {
+							if( ! $value ) $value = '';
+							if( is_array($value) ) {
+								$value = $module->stringify_config_option( false, $value, 0 );
+								$value = trim($value);
+								$value = rtrim($value, ','); // remove last ','
+							}
+							?>
+							<textarea name="<?= $module_id ?>[<?= $option ?>]"><?= $value ?></textarea>
+							<?php
 						}
 
 						if( $description ) echo '<br><small>'.$description.'</small>';

@@ -173,6 +173,19 @@ class Module {
 		return $config_options;
 	}
 
+	function get_config_type( $option ) {
+
+		$config_definitions = $this->get_config_definitions();
+
+		if( empty($config_definitions) ) return false;
+		if( empty($config_definitions[$option]) ) return false;
+		if( empty($config_definitions[$option]['type'])) return false;
+
+		return $config_definitions[$option]['type'];
+
+		return $config_options;	
+	}
+
 	function get_config_current( $option ) {
 
 		$config = $this->load_config();
@@ -338,7 +351,12 @@ class Module {
 		} else {
 			// is string, or unknown
 
-			$new_value = "'".$value."'";
+			$type = $this->get_config_type( $key );
+			if( $type == 'complex' ) {
+				$new_value = $value; // should already be a stringified array or similar, we want to save it 'as-is'
+			} else {
+				$new_value = "'".$value."'";
+			}
 
 		}
 

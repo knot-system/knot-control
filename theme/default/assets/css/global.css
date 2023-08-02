@@ -204,13 +204,18 @@ button,
 	}
 
 	input,
-	select {
+	select,
+	textarea {
 		width: 100%;
 	}
 
 		input[type="checkbox"] {
 			min-width: unset;
 			width: unset;
+		}
+
+		textarea {
+			height: 8.2em;
 		}
 
 sub, sup {
