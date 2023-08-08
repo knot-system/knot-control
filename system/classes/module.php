@@ -115,9 +115,9 @@ class Module {
 		return true;
 	}
 
-	function load_config() {
+	function load_config( $force = false ) {
 
-		if( $this->config !== NULL ) return $this->config;
+		if( $this->config !== NULL && ! $force ) return $this->config;
 
 		$local_config_file = $this->abspath.'config.php';
 		$core_config_file = $this->abspath.'system/config.php';
