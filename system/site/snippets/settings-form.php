@@ -62,17 +62,17 @@ snippet('header');
 							<?php
 						} elseif( $type == 'string' ) {
 							?>
-							<input type="text" value="<?= $value ?>" placeholder="<?= $default ?>">
+							<input name="<?= $module_id ?>[<?= $option ?>]" type="text" value="<?= $value ?>" placeholder="<?= $default ?>">
 							<?php
 						} elseif( $type == 'url' ) {
 							?>
-							<input type="url" value="<?= $value ?>" placeholder="<?= $default ?>">
+							<input name="<?= $module_id ?>[<?= $option ?>]" type="url" value="<?= $value ?>" placeholder="<?= $default ?>">
 							<?php
 						} elseif( $type == 'int' ) {
 							if( $value ) $value = (int) $value;
 							if( $default ) $default = (int) $default;
 							?>
-							<input type="number" value="<?= $value ?>" placeholder="<?= $default ?>" step="1" min="0">
+							<input name="<?= $module_id ?>[<?= $option ?>]" type="number" value="<?= $value ?>" placeholder="<?= $default ?>" step="1" min="0">
 							<?php
 						} elseif( $type == 'theme' ) {
 							$themes = $module->get_themes();
