@@ -1,5 +1,7 @@
 v.0.2.1
 
+- moved repo to 'knot-system' organization on GitHub
+- updated default theme to v.0.2.1
 - bugfix for some setting fields not saving
 
 

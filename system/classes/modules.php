@@ -13,24 +13,24 @@ class Modules {
 	];
 	private $module_update_urls = [
 		'knot-site' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-site/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/knot-site/archive/refs/heads/main.zip',
+			'release_api' => 'https://api.github.com/repos/knot-system/knot-site/releases',
+			'dev_zipball' => 'https://github.com/knot-system/knot-site/archive/refs/heads/main.zip',
 		],
 		'knot-home' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-home/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/knot-home/archive/refs/heads/main.zip',
+			'release_api' => 'https://api.github.com/repos/knot-system/knot-home/releases',
+			'dev_zipball' => 'https://github.com/knot-system/knot-home/archive/refs/heads/main.zip',
 		],
 		'knot-daemon' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-daemon/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/knot-daemon/archive/refs/heads/main.zip',
+			'release_api' => 'https://api.github.com/repos/knot-system/knot-daemon/releases',
+			'dev_zipball' => 'https://github.com/knot-system/knot-daemon/archive/refs/heads/main.zip',
 		],
 		'knot-auth' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-auth/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/knot-auth/archive/refs/heads/main.zip',
+			'release_api' => 'https://api.github.com/repos/knot-system/knot-auth/releases',
+			'dev_zipball' => 'https://github.com/knot-system/knot-auth/archive/refs/heads/main.zip',
 		],
 		'knot-control' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-control/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/knot-control/archive/refs/heads/main.zip',
+			'release_api' => 'https://api.github.com/repos/knot-system/knot-control/releases',
+			'dev_zipball' => 'https://github.com/knot-system/knot-control/archive/refs/heads/main.zip',
 		],
 	];
 
