@@ -5,32 +5,32 @@ class Modules {
 	
 	private $modules = [];
 	private $module_names = [
-		'eigenheim' => 'Eigenheim',
-		'sekretaer' => 'Sekretär',
-		'postamt' => 'Postamt',
-		'einwohnermeldeamt' => 'Einwohnermeldeamt',
-		'homestead-control' => 'Homestead Control',
+		'knot-site' => 'Knot Site',
+		'knot-home' => 'Knot Home',
+		'knot-daemon' => 'Knot Daemon',
+		'knot-auth' => 'Knot Auth',
+		'knot-control' => 'Knot Control',
 	];
 	private $module_update_urls = [
-		'eigenheim' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/eigenheim/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/eigenheim/archive/refs/heads/main.zip',
+		'knot-site' => [
+			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-site/releases',
+			'dev_zipball' => 'https://github.com/maxhaesslein/knot-site/archive/refs/heads/main.zip',
 		],
-		'sekretaer' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/sekretaer/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/sekretaer/archive/refs/heads/main.zip',
+		'knot-home' => [
+			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-home/releases',
+			'dev_zipball' => 'https://github.com/maxhaesslein/knot-home/archive/refs/heads/main.zip',
 		],
-		'postamt' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/postamt/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/postamt/archive/refs/heads/main.zip',
+		'knot-daemon' => [
+			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-daemon/releases',
+			'dev_zipball' => 'https://github.com/maxhaesslein/knot-daemon/archive/refs/heads/main.zip',
 		],
-		'einwohnermeldeamt' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/einwohnermeldeamt/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/einwohnermeldeamt/archive/refs/heads/main.zip',
+		'knot-auth' => [
+			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-auth/releases',
+			'dev_zipball' => 'https://github.com/maxhaesslein/knot-auth/archive/refs/heads/main.zip',
 		],
-		'homestead-control' => [
-			'release_api' => 'https://api.github.com/repos/maxhaesslein/homestead-control/releases',
-			'dev_zipball' => 'https://github.com/maxhaesslein/homestead-control/archive/refs/heads/main.zip',
+		'knot-control' => [
+			'release_api' => 'https://api.github.com/repos/maxhaesslein/knot-control/releases',
+			'dev_zipball' => 'https://github.com/maxhaesslein/knot-control/archive/refs/heads/main.zip',
 		],
 	];
 

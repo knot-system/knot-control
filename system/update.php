@@ -2,8 +2,8 @@
 
 // this file can update the system with the latest release from github. create a empty file called 'update' or 'update.txt' in the root directory, and then add '?update' to the url, to trigger the update
 
-$api_url = 'https://api.github.com/repos/maxhaesslein/homestead-control/releases';
-$dev_zip = 'https://github.com/maxhaesslein/homestead-control/archive/refs/heads/main.zip';
+$api_url = 'https://api.github.com/repos/maxhaesslein/knot-control/releases';
+$dev_zip = 'https://github.com/maxhaesslein/knot-control/archive/refs/heads/main.zip';
 
 $step = false;
 if( ! empty($_GET['step']) ) $step = $_GET['step'];
@@ -25,7 +25,7 @@ include_once( 'functions_shared/request.php' );
 $core_version = get_system_version( $abspath );
 
 ?>
-<h1>Homestead Control System Update</h1>
+<h1>Knot Control Update</h1>
 <?php
 
 
@@ -135,13 +135,13 @@ if( $step == 'check' ) {
 
 		$zipball = $latest_release->zipball_url;
 
-		$zip_folder_name_start = 'maxhaesslein-homestead-control-';
+		$zip_folder_name_start = 'maxhaesslein-knot-control-';
 
 	} elseif( $_REQUEST['version'] == 'dev' ) {
 
 		$zipball = $dev_zip;
 
-		$zip_folder_name_start = 'homestead-control-';
+		$zip_folder_name_start = 'knot-control-';
 
 	} else {
 
@@ -170,7 +170,7 @@ if( $step == 'check' ) {
 	$ch = curl_init( $zipball );
 	curl_setopt( $ch, CURLOPT_FOLLOWLOCATION, 1 );
 	curl_setopt( $ch, CURLOPT_RETURNTRANSFER, 1 );
-	curl_setopt( $ch, CURLOPT_USERAGENT, 'maxhaesslein/homestead-control/'.$core_version );
+	curl_setopt( $ch, CURLOPT_USERAGENT, 'knot/control/'.$core_version );
 	curl_setopt( $ch, CURLOPT_FILE, $file_handle );
 	curl_exec( $ch );
 	curl_close( $ch );

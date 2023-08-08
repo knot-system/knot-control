@@ -1,8 +1,8 @@
-# Homestead Control
+# Knot Control
 
-this helps configuring and updating a [Homestead install](https://github.com/maxhaesslein/homestead).
+This helps configuring and updating a **Knot System**.
 
-This is currently in beta stage. **Things may break, and are likely to change in the future!**
+**This is an early beta version!** Some things may break, or change in the future!
 
 ## Initial Setup
 
@@ -66,6 +66,8 @@ The `theme/{themename}/config.php` can overwrite config options from `system/con
 ## Updating
 
 **Important:** Before updating, backup your `config.php` (and your custom theme inside the `theme/` folder, if you have any). Better be safe than sorry.
+
+You can log into Knot Control and use the interface to update. Or you use the following instructions:
 
 Create a new empty file called `update` (or `update.txt`) in the root folder of your installation. Then open the website, and append `?update` to the URL to trigger the update process. **Important:** if you don't finish the update, manually delete the `update` (or `update.txt`) file (if the update process finishes, this file gets deleted automatically).
 

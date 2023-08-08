@@ -213,7 +213,7 @@ class User {
 		if( ! empty($post['url']) ) $url = $post['url'];
 
 
-		$cookie = new Cookie( 'homestead-control-url' );
+		$cookie = new Cookie( 'knot-control-url' );
 		if( ! empty($post['rememberurl']) && $post['rememberurl'] == 'true' ) {
 
 			$cookie->set($url);

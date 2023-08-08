@@ -60,9 +60,9 @@ class Core {
 
 		$this->theme->add_metatag( 'charset', '<meta charset="utf-8">' );
 		$this->theme->add_metatag( 'viewport', '<meta name="viewport" content="width=device-width,initial-scale=1.0">' );
-		$this->theme->add_metatag( 'title', '<title>Homestead Control</title>' );
+		$this->theme->add_metatag( 'title', '<title>Knot Control</title>' );
 
-		$this->theme->add_metatag( 'generator', '<meta tag="generator" content="Homestead Control v.'.$core->version().'">' );
+		$this->theme->add_metatag( 'generator', '<meta tag="generator" content="Knot Control v.'.$core->version().'">' );
 
 		$this->route = new Route();
 

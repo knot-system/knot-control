@@ -6,7 +6,7 @@ head_html();
 
 
 $prefill_url = '';
-$cookie = new Cookie('homestead-control-url');
+$cookie = new Cookie('knot-control-url');
 if( $cookie->exists() ) {
 	$cookie->refresh();
 	$prefill_url = $cookie->get();
@@ -22,7 +22,7 @@ if( isset($_GET['login_url']) ) {
 
 	<section class="login-content">
 
-		<h2>Homestead Control</h2>
+		<h2>Knot Control</h2>
 
 		<?php
 		if( isset($_GET['error']) ) {
