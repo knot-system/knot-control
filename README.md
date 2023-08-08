@@ -1,6 +1,6 @@
 # Knot Control
 
-This helps configuring and updating a **Knot System**.
+This helps configuring and updating a [Knot System](https://github.com/knot-system).
 
 **This is an early beta version!** Some things may break, or change in the future!
 
