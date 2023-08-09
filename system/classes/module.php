@@ -282,10 +282,28 @@ class Module {
 				continue;
 			}
 
-			if( $new_value == 'default' ) {
+			if( $new_value == 'default' || ! $new_value ) {
 				// remove existing options, that are now set to 'default'
 				unset($config['local'][$option]);
 				continue;
+			}
+
+			$type = $editable_config_options[$option];
+			if( $type == 'bool' ) {
+				if( $new_value == 'true' ) {
+					$new_value = true;
+				} elseif( $new_value == 'false' ) {
+					$new_value = false;
+				} else {
+					unset($config['local'][$option]);
+					continue;
+				}
+			} elseif( $type == 'int' ) {
+				$new_value = (int) $new_value;
+				if( ! $new_value ) {
+					unset($config['local'][$option]);
+					continue;
+				}
 			}
 
 			// set new option value
