@@ -17,8 +17,6 @@ if( is_array($data) ) {
 			$success = false;
 		}
 
-		$module->load_config( true );
-
 	}
 	
 }

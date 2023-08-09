@@ -1,6 +1,7 @@
 v.0.2.2
 
 - bugfix: convert bool and int variables on save
+- force config reload after saving, if php files are cached on the server
 
 
 v.0.2.1

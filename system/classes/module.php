@@ -124,6 +124,9 @@ class Module {
 
 		$local_config = [];
 		if( file_exists($local_config_file) ) {
+
+			$this->clear_cache($local_config_file);
+
 			$local_config = include($local_config_file);
 		}
 
@@ -140,6 +143,19 @@ class Module {
 		$this->config = $config;
 
 		return $config;
+	}
+
+	function clear_cache( $path ) {
+
+		// NOTE: when we use 'include' to get a config file, this file may still be cached; we need to clear possible caches here, to force a reload of this config file
+
+		if( ! file_exists($path) ) return;
+
+		if( function_exists('opcache_invalidate') && strlen(ini_get("opcache.restrict_api")) < 1 ) {
+			opcache_invalidate( $path, true );
+		} elseif( function_exists('apc_compile_file') ) {
+			apc_compile_file( $path );
+		}
 	}
 
 	function get_config_definitions() {
@@ -321,7 +337,9 @@ class Module {
 		}
 		$new_config_content .= "];\r\n";
 		
-		return file_put_contents( $this->abspath.'config.php', $new_config_content );
+		$success = file_put_contents( $this->abspath.'config.php', $new_config_content );
+
+		return $success;
 	}
 
 	function stringify_config_option( $key, $value, $depth = 1 ) {
